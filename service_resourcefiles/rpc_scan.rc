@@ -1,0 +1,15 @@
+<ruby>
+puts "****************  Running RPC Enumeration *********************"
+framework.db.hosts.each do |host|
+if host.os_name =~ /Windows/
+ host.services.each do |service|
+        if service.name =~ /rpc/ and service.state == "open"
+         self.run_single("set RHOSTS #{host.address}")
+         self.run_single(" set RPORT #{service.port}")
+         self.run_single("run")
+        end
+      end
+        else
+ end
+end
+</ruby>

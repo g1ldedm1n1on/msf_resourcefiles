@@ -1,0 +1,71 @@
+setg THREADS 10
+use auxiliary/scanner/smb/smb_version
+resource ./service_resourcefiles/smb_scan.rc
+
+use auxiliary/scanner/netbios/nbname
+services -p 137 -R
+run
+
+
+use auxiliary/scanner/dcerpc/management
+resource ./service_resourcefiles/rpc_scan.rc
+
+use auxiliary/scanner/dcerpc/endpoint_mapper
+resource ./service_resourcefiles/rpc_scan.rc
+
+
+use auxiliary/scanner/misc/sunrpc_portmapper
+resource ./service_resourcefiles/sunrpc_scan.rc
+
+
+use auxiliary/scanner/ssh/ssh_version
+resource ./service_resourcefiles/sshscan.rc
+
+
+
+use auxiliary/scanner/winrm/winrm_auth_methods
+services -p 5985 -R
+run
+
+
+use auxiliary/scanner/ntp/ntp_monlist
+services -p 123 -R
+set SHOW_LIST true
+run
+
+
+use auxiliary/scanner/mssql/mssql_ping
+resource ./service_resourcefiles/mssql_scan.rc
+
+use auxiliary/scanner/http/http_put
+resource ./service_resourcefiles/http_scan.rc
+
+set SSL true
+resource ./service_resourcefiles/https_scanv2.rc
+
+
+use auxiliary/scanner/http/robots_txt
+resource ./service_resourcefiles/http_scan.rc
+
+set SSL true
+resource ./service_resourcefiles/https_scan.rc
+
+use auxiliary/scanner/http/cert
+resource ./service_resourcefiles/https_scan.rc
+
+use auxiliary/scanner/http/ssl
+resource ./service_resourcefiles/https_scan.rc
+
+use auxiliary/scanner/http/ssl_version
+resource ./service_resourcefiles/https_scan.rc
+
+use auxiliary/scanner/http/http_hsts
+resource ./service_resourcefiles/https_scan.rc
+
+use auxiliary/scanner/http/options
+resource ./service_resourcefiles/http_scan.rc
+
+
+set SSL True
+resource ./service_resourcefiles/https_scan.rc
+

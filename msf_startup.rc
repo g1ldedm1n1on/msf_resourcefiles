@@ -1,0 +1,6 @@
+setg VERBOSE true
+setg VERBOSE true
+setg InitialAutoRunScript 'migrate -f'
+setg THREADS 10
+setg ExitOnSession false
+load pentest
